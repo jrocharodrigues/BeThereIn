@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:dividerPadding="8dp"
+    android:orientation="vertical"
+    android:padding="16dp" >
+
+    <TextView
+        android:id="@+id/tvDesription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:labelFor="@+id/etFrom"
+        android:paddingBottom="8dp"
+        android:text="@string/description"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:paddingBottom="8dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Title" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/tvLabelEtTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:labelFor="@+id/etTo"
+        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:text="@string/to"
+        android:textSize="12sp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/to"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:completionThreshold="3"
+        android:fontFamily="sans-serif"
+        android:hint="Destination"
+        android:inputType="textNoSuggestions"
+        android:paddingBottom="16dp" />
+
+    
+    <TextView
+        android:id="@+id/tvLabelEtFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:labelFor="@+id/etFrom"
+        android:paddingBottom="8dp"
+        android:paddingTop="16dp"
+        android:text="@string/from"
+        android:textSize="12sp" />
+
+    <Switch
+        android:id="@+id/swDynLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:fontFamily="sans-serif"
+        android:gravity="center_vertical|start"
+        android:paddingBottom="8dp"
+        android:text="@string/use_current_location"
+        android:textColor="@color/text_primary" 
+        android:onClick="onSwitchClicked"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/from"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:completionThreshold="3"
+        android:fontFamily="sans-serif"
+        android:hint="Origin"
+        android:inputType="textNoSuggestions"
+        android:paddingBottom="8dp"
+        android:textSize="16sp"
+        android:visibility="gone" >
+
+    </AutoCompleteTextView>
+
+</LinearLayout>

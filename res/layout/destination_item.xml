@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:showDividers="beginning|middle|end" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp" >
+
+        <ImageView
+            android:id="@+id/ivRefresh"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/ivShare"
+            android:layout_toLeftOf="@+id/ivShare"
+            android:src="@drawable/ic_action_refresh" />
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/ivEdit"
+            android:layout_toLeftOf="@+id/ivEdit"
+            android:src="@drawable/ic_action_share" />
+
+        <ImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@+id/ivDelete"
+            android:layout_toLeftOf="@+id/ivDelete"
+            android:src="@drawable/ic_action_edit" />
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_action_discard" />
+
+        <TextView
+            android:id="@+id/tvFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tvLabelFrom"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="8dp"
+            android:text="Aveiro"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvLabelFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif"
+            android:text="@string/from"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivClock"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignLeft="@+id/tvLabelFrom"
+            android:layout_below="@+id/tvLabelFrom"
+            android:src="@drawable/ic_action_time" />
+
+        <TextView
+            android:id="@+id/tvTOA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivClock"
+            android:layout_toRightOf="@+id/ivClock"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="2dp"
+            android:text="18h30"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/ivWalking"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignLeft="@+id/tvLabelFrom"
+            android:layout_below="@+id/ivClock"
+            android:src="@drawable/walking" />
+
+        <TextView
+            android:id="@+id/tvTOAWalking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvTOA"
+            android:layout_alignTop="@+id/ivWalking"
+            android:fontFamily="sans-serif"
+            android:paddingLeft="2dp"
+            android:text="21h30"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>
