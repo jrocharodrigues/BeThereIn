@@ -9,13 +9,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,13 +28,13 @@ import com.melnykov.fab.FloatingActionButton;
 
 public class DestinationListActivity extends Activity implements
 		SensorEventListener {
-	DestinationListAdapter exAdpt;
-	ExpandableListView exList;
+	DestinationListAdapter destinatonAdapter;
+	RecyclerView recyclerView;
 
 	private LocationHelper mLocationHelper;
 	private TextView tvLocation;
 	private TextView tvAddress;
-	
+
 	private GetAddressTask get_address;
 
 	private SensorManager mSensorManager;
@@ -42,7 +44,7 @@ public class DestinationListActivity extends Activity implements
 	private float[] compassVals = new float[3];
 	private float[] mOrientation = new float[3];
 	private float mCurrentDegree = 0f;
-	
+
 	private float heading = 0f;
 	private float destBearing = 0f;
 	private GeomagneticField geoField;
@@ -65,10 +67,13 @@ public class DestinationListActivity extends Activity implements
 		tvLocation = (TextView) findViewById(R.id.textView1);
 		tvAddress = (TextView) findViewById(R.id.textView2);
 
-		exList = (ExpandableListView) findViewById(R.id.expandableListView1);
+		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		destinatonAdapter = new DestinationListAdapter(this,
+				Globals.destinations);
 
-		exAdpt = new DestinationListAdapter(this, Globals.destinations);
-		exList.setIndicatorBounds(0, 20);
+		recyclerView.setAdapter(destinatonAdapter);
+		recyclerView.setItemAnimator(new DefaultItemAnimator());
+		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 		portoLocation.setLatitude(41.158567);
 		portoLocation.setLongitude(-8.628167299999999);
@@ -99,12 +104,14 @@ public class DestinationListActivity extends Activity implements
 
 					tvLocation
 							.setText(locationStringFromLocation(Globals.currentLocation));
-					
-				//	ivCompass =
-					
-					View tempView = exAdpt.getGroupView(2, false, null, exList);
-					
-					//ivCompass = (ImageView) tempView.findViewById(R.id.ivCompass);
+
+					// ivCompass =
+
+					// View tempView = exAdpt.getGroupView(2, false, null,
+					// exList);
+
+					// ivCompass = (ImageView)
+					// tempView.findViewById(R.id.ivCompass);
 
 					(new GetAddressTask(DestinationListActivity.this,
 							new onFinish() {
@@ -192,7 +199,7 @@ public class DestinationListActivity extends Activity implements
 		});
 
 		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.attachToListView(exList);
+		fab.attachToRecyclerView(recyclerView);
 
 		fab.setOnClickListener(new OnClickListener() {
 
@@ -229,7 +236,7 @@ public class DestinationListActivity extends Activity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		exList.setAdapter(exAdpt);
+		// exList.setAdapter(exAdpt);
 		mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_UI);
 		mSensorManager.registerListener(this, mMagnetometer,
@@ -327,13 +334,14 @@ public class DestinationListActivity extends Activity implements
 				else
 					bearingText = "?";
 
-				tvAddress.setText("Heading: " + Float.toString(heading)
-						+ " degrees");
-				
-				Globals.tvDesc.setText(bearingText);
+				tvAddress.setText("destBearing: " + Float.toString(destBearing)
+						+ "azimuth: " + azimuth + " + Heading: "
+						+ Float.toString(heading));
+
+				// Globals.tvDesc.setText(bearingText);
 
 				RotateAnimation ra = new RotateAnimation(mCurrentDegree,
-						-heading, Animation.RELATIVE_TO_SELF, 0.5f,
+						heading, Animation.RELATIVE_TO_SELF, 0.5f,
 						Animation.RELATIVE_TO_SELF, 0.5f);
 
 				ra.setDuration(250);
@@ -341,7 +349,7 @@ public class DestinationListActivity extends Activity implements
 				ra.setFillAfter(true);
 
 				Globals.ivCompass.startAnimation(ra);
-				mCurrentDegree = -heading;
+				mCurrentDegree = heading;
 			}
 		}
 	}

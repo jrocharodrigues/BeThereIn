@@ -2,114 +2,59 @@ package com.impecabel.betherein;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.animation.Animation;
 
-public class DestinationListAdapter extends BaseExpandableListAdapter {
+public class DestinationListAdapter extends RecyclerView.Adapter<DestinationViewHolder> {
 
-	Activity activity;
-	ArrayList<Destination> destinations;
+	private Context context;
+	private ArrayList<Destination> destinations;
 
-	public DestinationListAdapter(Activity activity,
+	public DestinationListAdapter(Context context,
 			ArrayList<Destination> destinations) {
-		this.activity = activity;
+		this.context = context;
 		this.destinations = destinations;
 	}
+	
+	// Create new views (invoked by the layout manager)
+    @Override
+    public DestinationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.destination_group_item, parent, false);
+        DestinationViewHolder viewHolder = new DestinationViewHolder(context, view);
+        return viewHolder;
+    }
+    
+ // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(DestinationViewHolder viewHolder, int position) {
+    	Destination destination = destinations.get(position);
+        viewHolder.tvDescription.setText(destination.getDescription());
+        if (position == 1)
+        	Globals.ivCompass = viewHolder.ivCompass;
+        
+        //viewHolder.ivFlag.setImageResource(country.getFlagResID());
+    }
 
 	@Override
-	public Object getChild(int groupPosition, int childPosition) {
-		return destinations.get(groupPosition).getDetails();
-	}
-
-	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
-			ViewGroup parent) {
-		if (convertView == null){			
-			LayoutInflater inflater = activity.getLayoutInflater();
-			convertView = inflater.inflate(R.layout.destination_item, parent, false);
-		}
-		
-		TextView tvFrom = (TextView) convertView.findViewById(R.id.tvFrom);
-		//TextView tvTo = (TextView) convertView.findViewById(R.id.tvTo);
-		
-		DestinationDetails destDetails = destinations.get(groupPosition).getDetails();
-		
-		tvFrom.setText(destDetails.getOrigin());
-		//tvTo.setText(destDetails.getDestination());
-		
-		return convertView;
-
-	}
-
-
-	@Override
-	public Object getGroup(int groupPosition) {
-		return destinations.get(groupPosition);
-	}
-
-	@Override
-	public int getGroupCount() {
+	public int getItemCount() {
 		return destinations.size();
 	}
+	
+	public void add(Destination destination, int position) {
+		destinations.add(position, destination);
+        notifyItemInserted(position);
+    }
 
-	@Override
-	public long getGroupId(int groupPosition) {
-		return groupPosition;
-	}
-
-	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,
-			View convertView, ViewGroup parent) {
-		if (convertView == null){			
-			LayoutInflater inflater = activity.getLayoutInflater();
-			convertView = inflater.inflate(R.layout.destination_group_item, parent, false);
-		}
-		
-		TextView tvDescription = (TextView) convertView.findViewById(R.id.tvDescription);
-		
-		if (groupPosition == 2){
-			Globals.ivCompass = (ImageView) convertView.findViewById(R.id.ivCompass);
-			Globals.tvDesc = (TextView) convertView.findViewById(R.id.tvDescription);
-		}
-		
-		Destination dest = destinations.get(groupPosition);
-		
-		tvDescription.setText(dest.getDescription());
-		
-		return convertView;
-		
-		
-	}
-
-	@Override
-	public long getChildId(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getChildrenCount(int groupPosition) {
-		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
-	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+    public void remove(Destination destination) {
+        int position = destinations.indexOf(destination);
+        destinations.remove(position);
+        notifyItemRemoved(position);
+    }
+    
 
 
 }
