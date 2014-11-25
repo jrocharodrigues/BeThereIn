@@ -1,8 +1,8 @@
 package com.impecabel.betherein;
 
+import android.location.Location;
 import android.os.AsyncTask;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
@@ -56,8 +56,10 @@ public class FetchPlaceDetailsTask extends AsyncTask<Void, Void, Place> {
 			PlaceDetails placedetails = placedetailsresult.placedetails;
 			place.setPlace_id(place_id);
 			place.setFormatted_address(placedetails.formatted_address);
-			place.setLocation(new LatLng(placedetails.geometry.location.lat,
-					placedetails.geometry.location.lng));
+			Location placeLocation = new Location("PlaceDetailsApi");
+			placeLocation.setLatitude(placedetails.geometry.location.lat);
+			placeLocation.setLongitude(placedetails.geometry.location.lng);
+			place.setLocation(placeLocation);
 
 			return place;
 

@@ -1,12 +1,12 @@
 package com.impecabel.betherein;
 
-import com.google.android.gms.maps.model.LatLng;
+import android.location.Location;
 
 public class Place {
 	private String place_id;
 	private String description;
 	private String formatted_address;
-	private LatLng location;
+	private Location location;
 	private boolean use_current_location;
 	
 	public Place(String place_id, String description) {
@@ -24,14 +24,14 @@ public class Place {
 	/**
 	 * @return the location
 	 */
-	public LatLng getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
 	/**
 	 * @param location the location to set
 	 */
-	public void setLocation(LatLng location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 

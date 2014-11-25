@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DestinationListAdapter extends BaseExpandableListAdapter {
@@ -70,6 +71,11 @@ public class DestinationListAdapter extends BaseExpandableListAdapter {
 		}
 		
 		TextView tvDescription = (TextView) convertView.findViewById(R.id.tvDescription);
+		
+		if (groupPosition == 2){
+			Globals.ivCompass = (ImageView) convertView.findViewById(R.id.ivCompass);
+			Globals.tvDesc = (TextView) convertView.findViewById(R.id.tvDescription);
+		}
 		
 		Destination dest = destinations.get(groupPosition);
 		
