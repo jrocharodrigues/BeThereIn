@@ -1,5 +1,6 @@
 package com.impecabel.betherein;
 
+import garin.artemiy.compassview.library.CompassView;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +14,8 @@ public class DestinationViewHolder extends RecyclerView.ViewHolder implements Vi
     public TextView tvDescription;
     public TextView tvEta;
     public ImageView ivMode;
-    public ImageView ivCompass;
+    public CompassView ivCompass;
+    
 
     public DestinationViewHolder(Context context, View itemView) {
         super(itemView);
@@ -21,7 +23,7 @@ public class DestinationViewHolder extends RecyclerView.ViewHolder implements Vi
         tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
         tvEta = (TextView) itemView.findViewById(R.id.tvEta);
         ivMode = (ImageView) itemView.findViewById(R.id.ivMode);
-        ivCompass = (ImageView) itemView.findViewById(R.id.ivCompass);
+        ivCompass = (CompassView) itemView.findViewById(R.id.ivCompass);
         itemView.setOnClickListener(this);
     }
 

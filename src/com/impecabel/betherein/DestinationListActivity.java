@@ -1,6 +1,6 @@
 package com.impecabel.betherein;
 
-import android.app.Activity;
+import garin.artemiy.compassview.library.CompassSensorsActivity;
 import android.content.Intent;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.impecabel.betherein.FetchDirectionsTask.OnFinish;
@@ -26,7 +25,7 @@ import com.impecabel.betherein.GetAddressTask.onFinish;
 import com.impecabel.betherein.LocationHelper.onLocationUpdate;
 import com.melnykov.fab.FloatingActionButton;
 
-public class DestinationListActivity extends Activity implements
+public class DestinationListActivity extends CompassSensorsActivity implements
 		SensorEventListener {
 	DestinationListAdapter destinatonAdapter;
 	RecyclerView recyclerView;
@@ -51,13 +50,20 @@ public class DestinationListActivity extends Activity implements
 
 	private static final float ALPHA = 0.15f;
 
-	private Location portoLocation = new Location("FOR_TESTS");
+	//private Location portoLocation = new Location("FOR_TESTS");
 	private boolean hasDirections = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destination_list);
+		Globals.portoLocation = new Location("FOR_TESTS");
+		Globals.staticCurrentLocation = new Location("FOR_TESTS");
+		Globals.portoLocation.setLatitude(40.642989811262765);
+		Globals.portoLocation.setLongitude(-8.646524548530579);
+		Globals.staticCurrentLocation.setLatitude(40.64186191152463);
+		Globals.staticCurrentLocation.setLongitude(-8.643834292888641);
+		
 		Globals.destinations.add(new Destination("Coimbra",
 				new DestinationDetails("Aveiro", "Coimbra")));
 		Globals.destinations.add(new Destination("Porto",
@@ -67,6 +73,10 @@ public class DestinationListActivity extends Activity implements
 		tvLocation = (TextView) findViewById(R.id.textView1);
 		tvAddress = (TextView) findViewById(R.id.textView2);
 
+		
+		
+		
+		
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		destinatonAdapter = new DestinationListAdapter(this,
 				Globals.destinations);
@@ -75,8 +85,7 @@ public class DestinationListActivity extends Activity implements
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-		portoLocation.setLatitude(41.158567);
-		portoLocation.setLongitude(-8.628167299999999);
+		
 
 		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		mAccelerometer = mSensorManager
@@ -100,7 +109,7 @@ public class DestinationListActivity extends Activity implements
 									Globals.currentLocation.getAltitude())
 									.floatValue(), System.currentTimeMillis());
 					destBearing = Globals.currentLocation
-							.bearingTo(portoLocation);
+							.bearingTo(Globals.portoLocation);
 
 					tvLocation
 							.setText(locationStringFromLocation(Globals.currentLocation));
@@ -137,7 +146,7 @@ public class DestinationListActivity extends Activity implements
 
 											FetchDirectionsTask fd_task = new FetchDirectionsTask(
 													locationStringFromLocation(Globals.currentLocation),
-													locationStringFromLocation(portoLocation),
+													locationStringFromLocation(Globals.portoLocation),
 													Utils.MODE_DRIVING,
 													new OnFinish() {
 
@@ -237,10 +246,10 @@ public class DestinationListActivity extends Activity implements
 	protected void onResume() {
 		super.onResume();
 		// exList.setAdapter(exAdpt);
-		mSensorManager.registerListener(this, mAccelerometer,
+		/*mSensorManager.registerListener(this, mAccelerometer,
 				SensorManager.SENSOR_DELAY_UI);
 		mSensorManager.registerListener(this, mMagnetometer,
-				SensorManager.SENSOR_DELAY_UI);
+				SensorManager.SENSOR_DELAY_UI);*/
 
 		// TODO save and retrive location preferences
 	}
@@ -267,12 +276,12 @@ public class DestinationListActivity extends Activity implements
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mSensorManager.unregisterListener(this, mAccelerometer);
-		mSensorManager.unregisterListener(this, mMagnetometer);
+		/*mSensorManager.unregisterListener(this, mAccelerometer);
+		mSensorManager.unregisterListener(this, mMagnetometer);*/
 
 	}
 
-	@Override
+/*	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 
@@ -352,7 +361,7 @@ public class DestinationListActivity extends Activity implements
 				mCurrentDegree = heading;
 			}
 		}
-	}
+	}*/
 
 	public static String locationStringFromLocation(final Location location) {
 		return Location
