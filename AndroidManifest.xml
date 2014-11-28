@@ -19,7 +19,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
+        <activity 
             android:name=".DestinationListActivity"
             android:label="@string/app_name" >
             <intent-filter>
@@ -33,10 +33,17 @@
             android:label="@string/new_destination"
             android:parentActivityName=".DestinationListActivity" >
         </activity>
+          <activity
+            android:theme="@style/AppThemeNoActionBar" 
+            android:name=".DestinationDetailsActivity"
+            android:label=""
+            android:parentActivityName=".DestinationListActivity" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        
     </application>
 
 </manifest>

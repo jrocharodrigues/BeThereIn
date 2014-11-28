@@ -35,7 +35,7 @@ public class DestinationListAdapter extends RecyclerView.Adapter<DestinationView
         Log.d("ADAPTER", Globals.staticCurrentLocation.toString());
         Log.d("ADAPTER", Globals.portoLocation.toString());
     	viewHolder.tvDescription.setText(destination.getDescription());
-        viewHolder.ivCompass.initializeCompass(Globals.portoLocation, Globals.staticCurrentLocation, R.drawable.ic_action_send_now);
+        viewHolder.ivCompass.initializeCompass(Globals.staticCurrentLocation, Globals.portoLocation, R.drawable.ic_action_send_now);
         /* if (position == 1)
         	Globals.ivCompass = viewHolder.ivCompass;*/
         

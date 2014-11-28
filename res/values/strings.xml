@@ -8,7 +8,8 @@
     <string name="eta">22h50m</string>
     <string name="distance">(60,9 km)</string>
     <string name="action_add">Add</string>
-     <string name="action_accept">Accept</string>
+    <string name="action_accept">Accept</string>
+    <string name="action_cancel">Cancel</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>

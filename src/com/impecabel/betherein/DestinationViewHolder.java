@@ -2,6 +2,7 @@ package com.impecabel.betherein;
 
 import garin.artemiy.compassview.library.CompassView;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,5 +31,8 @@ public class DestinationViewHolder extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View v) {
         Toast.makeText(context, tvDescription.getText().toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context,
+				DestinationDetailsActivity.class);
+		context.startActivity(intent);
     }
 }
