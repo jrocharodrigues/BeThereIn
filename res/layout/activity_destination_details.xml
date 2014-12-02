@@ -1,36 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/AppThemeNoActionBar"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
     android:orientation="vertical" >
+
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <FrameLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/flexible_space_height" >
+
+            <!--
+                  <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:text="@string/lipsum" /> -->
+
+            <LinearLayout
+                android:id="@+id/directions_input_panel"
+                style="@style/DirectionsInputPanelContent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin_fab" >
+
+                <LinearLayout
+                    style="@style/DirectionsWaypointsContent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <FrameLayout
+                        style="@style/Container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.0" >
+
+                        <ImageView
+                            style="@style/CenteredImage"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_directions_form_dots" />
+
+                        <LinearLayout
+                            style="@style/MatchParentContainer"
+                            android:layout_gravity="center"
+                            android:orientation="vertical" >
+
+                            <ImageView
+                                android:id="@+id/directions_startpoint_icon"
+                                style="@style/CenteredImage"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_directions_form_destination_notselected" />
+
+                            <ImageView
+                                android:id="@+id/directions_endpoint_icon"
+                                style="@style/CenteredImage"
+                                android:layout_weight="1.0"
+                                android:src="@drawable/ic_directions_form_destination_notselected" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        style="@style/Content"
+                        android:layout_width="0.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0" >
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp" >
+
+                            <TextView
+                                android:id="@+id/directions_startpoint_textbox"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/DIRECTIONS_CHOOSE_START_POINT"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/directions_startpoint_textbox2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/DIRECTIONS_CHOOSE_START_POINT"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="16dp" 
+                            android:paddingTop="8dp">
+
+                            <TextView
+                                android:id="@+id/directions_endpoint_textbox"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/DIRECTIONS_CHOOSE_END_POINT"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/text_primary"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/directions_endpoint_textbox2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/DIRECTIONS_CHOOSE_END_POINT"
+                                android:paddingBottom="2dp"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--
+                    <FrameLayout
+                        android:id="@+id/directions_swapwaypoints_button"
+                        style="@style/Container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.0"
+                        android:contentDescription="@string/ACCESSIBILITY_SWAP_DESTINATION" >
+
+                        <ImageView
+                            android:id="@+id/directions_swapwaypoints_icon"
+                            style="@style/LeftAlignedImage"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_directions_form_swap" />
+                    </FrameLayout> -->
+                </LinearLayout>
+
+                <!--
+                     <LinearLayout
+                    android:id="@+id/options_container"
+                    style="@style/DirectionsInputPanelButtonsContent"
+                    android:minHeight="16dp" >
+
+                    <LinearLayout
+                        android:id="@+id/routeoptions_button"
+                        style="@style/DirectionsPanelOptionButton"
+                        android:layout_width="fill_parent"
+                        android:layout_weight="0.0" >
+
+                        <ImageView
+                            style="@style/CenteredImage"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_setting" />
+
+                        <TextView
+                            android:id="@+id/routeoptions_textbox"
+                            style="@style/IconTextButton"
+                            android:layout_width="fill_parent"
+                            android:clickable="false"
+                            android:textAppearance="@style/SmallTertiaryText" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/transitdatetimeoptions_button"
+                        style="@style/DirectionsPanelOptionButton"
+                        android:layout_width="0.0dip"
+                        android:layout_weight="1.0" >
+
+                        <ImageView
+                            style="@style/CenteredImage"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_setting" />
+
+                        <TextView
+                            android:id="@+id/transitdatetimeoptions_textbox"
+                            style="@style/IconTextButton"
+                            android:layout_width="fill_parent"
+                            android:clickable="false"
+                            android:textAppearance="@style/SmallTertiaryText" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/transitoptions_button"
+                        style="@style/DirectionsInputPanelOptionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="0.0"
+                        android:textAppearance="@style/SmallTertiaryText" />
+                </LinearLayout>-->
+            </LinearLayout>
+        </FrameLayout>
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
+    <View
+        android:id="@+id/flexible_space"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/primary" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+        app:theme="@style/Toolbar" />
+
+    <!--
+    android:layout_marginLeft on FrameLayout seems to be ignored on Android 2.3
+    so add a parent RelativeLayout and set padding to it.-->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp" 
-        android:background="@color/primary">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/toolbar_margin_start" >
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:padding="12dp"
-            android:src="@drawable/ic_action_cancel" />
-		
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="42dp"
-            android:gravity="bottom"
-            android:text="TextView"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:minHeight="?attr/actionBarSize"
             android:textColor="@android:color/white"
-            android:textSize="42sp" />
-        
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_height"
+                android:background="@android:color/transparent" />
+        </LinearLayout>
     </RelativeLayout>
 
-</LinearLayout>
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_edit"
+        app:fab_colorNormal="@color/accent_light"
+        app:fab_colorPressed="@color/accent"
+        fab:fab_colorRipple="@color/ripple"
+        fab:fab_type="mini" />
+
+</FrameLayout>

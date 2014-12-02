@@ -33,10 +33,15 @@
             android:label="@string/new_destination"
             android:parentActivityName=".DestinationListActivity" >
         </activity>
+        <activity
+            android:name=".TestActivity"
+            android:label="@string/new_destination"
+            android:parentActivityName=".DestinationListActivity" >
+        </activity>
           <activity
-            android:theme="@style/AppThemeNoActionBar" 
+            android:theme="@style/AppTheme.Toolbar" 
             android:name=".DestinationDetailsActivity"
-            android:label=""
+            android:label="Destination Details"
             android:parentActivityName=".DestinationListActivity" >
         </activity>
 

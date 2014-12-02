@@ -4,7 +4,6 @@ import garin.artemiy.compassview.library.CompassSensorsActivity;
 import android.content.Intent;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
@@ -16,8 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.TextView;
 
 import com.impecabel.betherein.FetchDirectionsTask.OnFinish;

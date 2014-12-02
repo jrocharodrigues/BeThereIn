@@ -13,5 +13,151 @@
         <item name="android:windowActionBar">false</item>
     	<item name="android:windowNoTitle">true</item>
      </style>
-
+     
+     <style name="Toolbar" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    
+      <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+    
+      
+      <!--   teste -->
+      
+       <style name="Content" parent="@style/Root">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingTop">0.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:paddingBottom">0.0dip</item>
+    </style>
+    
+        <style name="Root">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+         <style name="DirectionsInputPanelContent" parent="@style/Content">
+        <item name="android:orientation">vertical</item>
+        <item name="android:divider">?android:dividerHorizontal</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">8dp</item>
+    </style>
+    
+          <style name="DirectionsWaypointsContent" parent="@style/Content">
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+    <style name="Container" parent="@style/Root">
+        <item name="android:orientation">vertical</item>
+    </style>
+    
+    <style name="CenteredImage" parent="@style/Image">
+        <item name="android:layout_gravity">center</item>
+    </style>
+    
+    <style name="Image" parent="@style/Root">
+        <item name="android:id">@id/image</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+    
+     <style name="MatchParentContainer" parent="@style/Container">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+    
+     <style name="DividerListContent" parent="@style/Content">
+        <item name="android:divider">?android:dividerHorizontal</item>
+        <item name="android:showDividers">middle</item>
+    </style>
+    
+     <style name="DirectionsWaypointTextBox" parent="@style/PanelOptionTextBox">
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">0.0dip</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+    
+      <style name="PanelOptionTextBox" parent="@style/TextBox">
+        <item name="android:textAppearance">@style/MediumText</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+    </style>
+    
+      <style name="TextBox" parent="@style/Root">
+        <item name="android:textAppearance">@style/MediumText</item>
+        <item name="android:textColorLink">@android:color/holo_blue_dark</item>
+        <item name="android:id">@id/textbox</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="MediumText" >
+        <item name="android:textSize">24sp</item>
+    </style>
+   
+    
+      <style name="LeftAlignedImage" parent="@style/Image">
+        <item name="android:layout_gravity">left|center</item>
+    </style>
+    
+        <style name="DirectionsInputPanelButtonsContent" parent="@style/Content">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:divider">?android:attr/listDivider</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">2dp</item> 
+    </style>
+    
+        
+        <style name="DirectionsPanelOptionButton" parent="@style/Button">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:clickable">true</item>
+    </style>
+    
+        <style name="Button" parent="@style/Root">
+        <item name="android:gravity">center</item>
+        <item name="android:id">@id/button</item> 
+        <item name="android:scaleType">center</item>
+    </style>
+    
+        <style name="SmallText" parent="@style/Text">
+        <item name="android:textSize">12sp</item>
+    </style>
+    
+        <style name="SmallTertiaryText" parent="@style/SmallText">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+    
+        <style name="Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+    
+        <style name="IconTextButton" parent="@style/TextButton">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@null</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:drawablePadding">2dp</item>
+    </style>
+    
+        <style name="TextButton" parent="@style/Button">
+        <item name="android:textAppearance">@style/MediumText</item>
+        <item name="android:textColor">@null</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+     <style name="DirectionsInputPanelOptionButton" parent="@style/IconTextButton">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style> 
 </resources>
