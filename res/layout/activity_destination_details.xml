@@ -4,6 +4,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
@@ -19,29 +20,20 @@
             android:orientation="vertical"
             android:paddingTop="@dimen/flexible_space_height" >
 
-            <!--
-                  <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:text="@string/lipsum" /> -->
-
             <LinearLayout
-                android:id="@+id/directions_input_panel"
-                style="@style/DirectionsInputPanelContent"
+                android:id="@+id/directions_info_panel"
+                style="@style/Content"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin_fab" >
 
                 <LinearLayout
+                    android:id="@+id/directions_origin_dest"
                     style="@style/DirectionsWaypointsContent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingBottom="16dp" >
 
                     <FrameLayout
                         style="@style/Container"
@@ -77,49 +69,49 @@
                         style="@style/Content"
                         android:layout_width="0.0dip"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1.0" >
+                        android:layout_weight="1.0"
+                        android:paddingLeft="32dp" >
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="16dp" >
+                            android:orientation="vertical" >
 
                             <TextView
                                 android:id="@+id/directions_startpoint_textbox"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/DIRECTIONS_CHOOSE_START_POINT"
+                                android:text="Your Location"
                                 android:paddingBottom="2dp"
-                                android:textColor="@color/text_primary"
+                                android:textColor="@android:color/primary_text_light"
                                 android:textSize="16sp"
-                                android:typeface="serif" />
+                                android:typeface="serif" />                            
+                          
 
                             <TextView
                                 android:id="@+id/directions_startpoint_textbox2"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/DIRECTIONS_CHOOSE_START_POINT"
+                                android:text="40.38975, 8.5648"
                                 android:paddingBottom="2dp"
-                                android:textColor="@color/text_secondary"
+                                android:textColor="@android:color/secondary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="16dp" 
-                            android:paddingTop="8dp">
+                            android:orientation="vertical"
+                            android:paddingTop="8dp" >
 
                             <TextView
                                 android:id="@+id/directions_endpoint_textbox"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/DIRECTIONS_CHOOSE_END_POINT"
+                                android:text="Casa Guedes"
                                 android:paddingBottom="2dp"
-                                android:textColor="@color/text_primary"
+                                android:textColor="@android:color/primary_text_light"
                                 android:textSize="16sp"
                                 android:typeface="serif" />
 
@@ -127,83 +119,184 @@
                                 android:id="@+id/directions_endpoint_textbox2"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/DIRECTIONS_CHOOSE_END_POINT"
+                                android:text="Praça Poveiros 130, 4540 Porto"
                                 android:paddingBottom="2dp"
-                                android:textColor="@color/text_secondary"
+                                android:textColor="@android:color/secondary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
                         </LinearLayout>
                     </LinearLayout>
-
-                    <!--
-                    <FrameLayout
-                        android:id="@+id/directions_swapwaypoints_button"
-                        style="@style/Container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:layout_weight="0.0"
-                        android:contentDescription="@string/ACCESSIBILITY_SWAP_DESTINATION" >
-
-                        <ImageView
-                            android:id="@+id/directions_swapwaypoints_icon"
-                            style="@style/LeftAlignedImage"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginStart="8dp"
-                            android:src="@drawable/ic_directions_form_swap" />
-                    </FrameLayout> -->
                 </LinearLayout>
 
-                <!--
-                     <LinearLayout
-                    android:id="@+id/options_container"
-                    style="@style/DirectionsInputPanelButtonsContent"
-                    android:minHeight="16dp" >
+                <LinearLayout
+                    android:id="@+id/directions_modes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
                     <LinearLayout
-                        android:id="@+id/routeoptions_button"
-                        style="@style/DirectionsPanelOptionButton"
-                        android:layout_width="fill_parent"
-                        android:layout_weight="0.0" >
+                        android:id="@+id/driving_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="16dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="16dp" >
 
                         <ImageView
                             style="@style/CenteredImage"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_setting" />
+                            android:src="@drawable/ic_omni_box_car" />
 
-                        <TextView
-                            android:id="@+id/routeoptions_textbox"
-                            style="@style/IconTextButton"
+                        <LinearLayout
+                            android:id="@+id/directions_drive_text"
                             android:layout_width="fill_parent"
-                            android:clickable="false"
-                            android:textAppearance="@style/SmallTertiaryText" />
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="24dp" >
 
+                            <TextView
+                                android:id="@+id/routeoptions_textbox"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="via A1"
+                                android:textColor="@android:color/primary_text_light"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox2"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="78 km"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/directions_drive_text1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="16dp"  >
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"                                
+                                android:clickable="false"
+                                android:gravity="right"
+                                android:maxLines="1"
+                                android:paddingBottom="2dp"
+                                android:singleLine="true"
+                                android:text="47 m"
+                                android:textColor="@android:color/secondary_text_light"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox21"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="arrive at 18h45"
+                                android:gravity="right"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+                    </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/transitdatetimeoptions_button"
-                        style="@style/DirectionsPanelOptionButton"
-                        android:layout_width="0.0dip"
-                        android:layout_weight="1.0" >
+                        android:id="@+id/walking_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="16dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="16dp" >
 
                         <ImageView
                             style="@style/CenteredImage"
                             android:layout_width="wrap_content"
-                            android:src="@drawable/ic_setting" />
+                            android:src="@drawable/ic_omni_box_walking" />
 
-                        <TextView
-                            android:id="@+id/transitdatetimeoptions_textbox"
-                            style="@style/IconTextButton"
+                        <LinearLayout
+                            android:id="@+id/directions_drive_text2"
                             android:layout_width="fill_parent"
-                            android:clickable="false"
-                            android:textAppearance="@style/SmallTertiaryText" />
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="24dp" >
 
-                    <TextView
-                        android:id="@+id/transitoptions_button"
-                        style="@style/DirectionsInputPanelOptionButton"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="0.0"
-                        android:textAppearance="@style/SmallTertiaryText" />
-                </LinearLayout>-->
+                            <TextView
+                                android:id="@+id/routeoptions_textbox22"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="via N109"
+                                android:textColor="@android:color/primary_text_light"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox222"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="85 km"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/directions_drive_text12"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.0"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:paddingLeft="16dp"  >
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox12"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"                                
+                                android:clickable="false"
+                                android:gravity="right"
+                                android:maxLines="1"
+                                android:paddingBottom="2dp"
+                                android:singleLine="true"
+                                android:text="1h35m"
+                                android:textColor="@android:color/secondary_text_light"
+                                android:textSize="16sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/routeoptions_textbox212"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:paddingBottom="2dp"
+                                android:text="arrive at 19h30"
+                                android:gravity="right"
+                                android:textColor="@android:color/tertiary_text_light"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </FrameLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>

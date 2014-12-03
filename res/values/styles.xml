@@ -118,10 +118,24 @@
         
         <style name="DirectionsPanelOptionButton" parent="@style/Button">
         <item name="android:orientation">horizontal</item>
-        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingLeft">32dp</item>
         <item name="android:clickable">true</item>
     </style>
     
+        <style name="DirectionsPanel" parent="@style/Panel">
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@null</item>
+        <item name="android:paddingTop">0.0dip</item>
+        <item name="android:paddingBottom">0.0dip</item>
+        <item name="android:divider">?android:dividerHorizontal</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:dividerPadding">2dp</item>
+    </style>
+     <style name="Panel" parent="@style/Root">
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:padding">0.0dip</item>
+    </style>
         <style name="Button" parent="@style/Root">
         <item name="android:gravity">center</item>
         <item name="android:id">@id/button</item> 

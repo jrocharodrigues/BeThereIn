@@ -41,7 +41,7 @@
           <activity
             android:theme="@style/AppTheme.Toolbar" 
             android:name=".DestinationDetailsActivity"
-            android:label="Destination Details"
+            android:label="Guedes"
             android:parentActivityName=".DestinationListActivity" >
         </activity>
 
