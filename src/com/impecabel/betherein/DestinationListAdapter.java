@@ -32,8 +32,6 @@ public class DestinationListAdapter extends RecyclerView.Adapter<DestinationView
     @Override
     public void onBindViewHolder(DestinationViewHolder viewHolder, int position) {
     	Destination destination = destinations.get(position);
-        Log.d("ADAPTER", Globals.staticCurrentLocation.toString());
-        Log.d("ADAPTER", Globals.portoLocation.toString());
     	viewHolder.tvDescription.setText(destination.getDescription());
         viewHolder.ivCompass.initializeCompass(Globals.staticCurrentLocation, Globals.portoLocation, R.drawable.ic_action_send_now);
         /* if (position == 1)

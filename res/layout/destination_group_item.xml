@@ -1,51 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:orientation="horizontal"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/ivMode"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_alignRight="@+id/linearLayout1"
-        android:padding="16dp"
-        android:src="@drawable/driving" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:paddingLeft="72dp" >
+        <ImageView
+            android:id="@+id/ivMode"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignRight="@+id/linearLayout1"
+            android:padding="16dp"
+            android:src="@drawable/driving" />
 
-        <TextView
-            android:id="@+id/tvDescription"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coimbra"
-            android:textColor="@color/text_primary"
-            android:textSize="16sp" 
-            android:fontFamily="sans-serif"/>
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="72dp" >
 
-        <TextView
-            android:id="@+id/tvEta"
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Coimbra"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvEta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="45m"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <garin.artemiy.compassview.library.CompassView
+            android:id="@+id/ivCompass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45m"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" 
-            android:fontFamily="sans-serif"/>
-    </LinearLayout>
+            android:layout_alignParentRight="true"
+            android:padding="16dp" />
+    </RelativeLayout>
 
-    <garin.artemiy.compassview.library.CompassView
-        android:id="@+id/ivCompass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:padding="16dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" >
+    </View>
 
-</RelativeLayout>
+</LinearLayout>

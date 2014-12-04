@@ -44,6 +44,18 @@
             android:label="Guedes"
             android:parentActivityName=".DestinationListActivity" >
         </activity>
+        <activity
+            android:theme="@style/AppTheme.Toolbar" 
+            android:name=".DestinationDetailsWithImageActivity"
+            android:label="Guedes"
+            android:parentActivityName=".DestinationListActivity" >
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.Toolbar" 
+            android:name=".DestinationDetailsWithMapActivity"
+            android:label="Guedes"
+            android:parentActivityName=".DestinationListActivity" >
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

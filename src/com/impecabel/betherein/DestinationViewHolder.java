@@ -31,8 +31,17 @@ public class DestinationViewHolder extends RecyclerView.ViewHolder implements Vi
     @Override
     public void onClick(View v) {
         Toast.makeText(context, tvDescription.getText().toString(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(context,
+        Intent intent;
+        if (tvDescription.getText().toString().equals("Coimbra")){
+         intent = new Intent(context,
 				DestinationDetailsActivity.class);
-		context.startActivity(intent);
+        }else if (tvDescription.getText().toString().equals("Porto")){
+        	 intent = new Intent(context,
+     				DestinationDetailsWithImageActivity.class);
+        } else{
+       	 intent = new Intent(context,
+    				DestinationDetailsWithMapActivity.class);
+       }
+        context.startActivity(intent);
     }
 }

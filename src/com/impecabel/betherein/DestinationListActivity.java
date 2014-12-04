@@ -75,12 +75,14 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 		
 		
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		
 		destinatonAdapter = new DestinationListAdapter(this,
 				Globals.destinations);
 
 		recyclerView.setAdapter(destinatonAdapter);
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		//recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.)));
 
 		
 
@@ -219,6 +221,7 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 		});
 
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -36,6 +36,8 @@ public class DestinationDetailsActivity extends ActionBarActivity implements Obs
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        
 
         mFlexibleSpaceView = findViewById(R.id.flexible_space);
         mTitleView = (TextView) findViewById(R.id.title);
@@ -72,6 +74,7 @@ public class DestinationDetailsActivity extends ActionBarActivity implements Obs
                 updateFlexibleSpaceText(scrollView.getCurrentScrollY());
             }
         });
+   
     }
 
     @Override
@@ -106,7 +109,8 @@ public class DestinationDetailsActivity extends ActionBarActivity implements Obs
         int maxTitleTranslationY = mToolbarView.getHeight() + mFlexibleSpaceHeight - (int) (mTitleView.getHeight() * (1 + scale));
         int titleTranslationY = (int) (maxTitleTranslationY * ((float) mFlexibleSpaceHeight - adjustedScrollY) / mFlexibleSpaceHeight);
         ViewHelper.setTranslationY(mTitleView, titleTranslationY);
-     // Translate FAB
+     
+        // Translate FAB
         int maxFabTranslationY = mFlexibleSpaceAndToolbarHeight - mFab.getHeight() / 2;
         int fabTranslationY = Math.max(mActionBarSize - mFab.getHeight() / 2,
                 Math.min(maxFabTranslationY, -scrollY + mFlexibleSpaceAndToolbarHeight - mFab.getHeight() / 2));

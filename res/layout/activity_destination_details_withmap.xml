@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"    
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/staticmap" />
+
+    <View
+        android:id="@+id/overlay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/flexible_space_image_height"
+        android:background="?attr/colorPrimary" />
 
     <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:scrollbars="none" >
+<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/flexible_space_image_height"
+                android:background="@android:color/transparent" />
         <FrameLayout
             android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="@dimen/flexible_space_height" >
+            android:background="@android:color/white">
+            
 
             <LinearLayout
                 android:id="@+id/directions_info_panel"
@@ -80,19 +103,18 @@
                                 android:id="@+id/directions_startpoint_textbox"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Your Location"
                                 android:paddingBottom="2dp"
+                                android:text="Your Location"
                                 android:textColor="@android:color/primary_text_light"
                                 android:textSize="16sp"
-                                android:typeface="serif" />                            
-                          
+                                android:typeface="serif" />
 
                             <TextView
                                 android:id="@+id/directions_startpoint_textbox2"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:text="40.38975, 8.5648"
                                 android:paddingBottom="2dp"
+                                android:text="40.38975, 8.5648"
                                 android:textColor="@android:color/secondary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
@@ -108,8 +130,8 @@
                                 android:id="@+id/directions_endpoint_textbox"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Casa Guedes"
                                 android:paddingBottom="2dp"
+                                android:text="Casa Guedes"
                                 android:textColor="@android:color/primary_text_light"
                                 android:textSize="16sp"
                                 android:typeface="serif" />
@@ -118,8 +140,8 @@
                                 android:id="@+id/directions_endpoint_textbox2"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Praça Poveiros 130, 4540 Porto"
                                 android:paddingBottom="2dp"
+                                android:text="Praça Poveiros 130, 4540 Porto"
                                 android:textColor="@android:color/secondary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
@@ -185,12 +207,12 @@
                             android:layout_weight="1.0"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="16dp"  >
+                            android:paddingLeft="16dp" >
 
                             <TextView
                                 android:id="@+id/routeoptions_textbox1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"                                
+                                android:layout_height="wrap_content"
                                 android:clickable="false"
                                 android:gravity="right"
                                 android:maxLines="1"
@@ -206,14 +228,15 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:clickable="false"
+                                android:gravity="right"
                                 android:paddingBottom="2dp"
                                 android:text="arrive at 18h45"
-                                android:gravity="right"
                                 android:textColor="@android:color/tertiary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
                         </LinearLayout>
                     </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/walking_container"
                         android:layout_width="match_parent"
@@ -266,12 +289,12 @@
                             android:layout_weight="1.0"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:paddingLeft="16dp"  >
+                            android:paddingLeft="16dp" >
 
                             <TextView
                                 android:id="@+id/routeoptions_textbox12"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"                                
+                                android:layout_height="wrap_content"
                                 android:clickable="false"
                                 android:gravity="right"
                                 android:maxLines="1"
@@ -287,35 +310,21 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:clickable="false"
+                                android:gravity="right"
                                 android:paddingBottom="2dp"
                                 android:text="arrive at 19h30"
-                                android:gravity="right"
                                 android:textColor="@android:color/tertiary_text_light"
                                 android:textSize="14sp"
                                 android:typeface="serif" />
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/view1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="56dp"
-                    android:src="@drawable/staticmap"/>
-
+         
             </LinearLayout>
-
         </FrameLayout>
+        </LinearLayout>
     </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
-
-    <View
-        android:id="@+id/flexible_space"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/primary" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -328,7 +337,8 @@
 
     <!--
     android:layout_marginLeft on FrameLayout seems to be ignored on Android 2.3
-    so add a parent RelativeLayout and set padding to it.-->
+    so add a parent RelativeLayout and set padding to it.
+    -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -359,7 +369,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/flexible_space_height"
+                android:layout_height="@dimen/flexible_space_image_height"
                 android:background="@android:color/transparent" />
         </LinearLayout>
     </RelativeLayout>
@@ -373,6 +383,6 @@
         app:fab_colorNormal="@color/accent_light"
         app:fab_colorPressed="@color/accent"
         app:fab_colorRipple="@color/ripple"
-        app:fab_type="mini"/>
+        app:fab_type="mini" />
 
 </FrameLayout>
