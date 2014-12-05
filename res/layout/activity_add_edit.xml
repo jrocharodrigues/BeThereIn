@@ -1,87 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:dividerPadding="8dp"
-    android:orientation="vertical"
-    android:padding="16dp" >
+    android:scrollbarStyle="outsideOverlay"
+    tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/tvDesription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:labelFor="@+id/etFrom"
-        android:paddingBottom="8dp"
-        android:text="@string/description"
-        android:textSize="12sp" />
-
-    <EditText
-        android:id="@+id/etDescription"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
-        android:paddingBottom="8dp"
-        android:textAppearance="@android:style/TextAppearance.Material.Title" >
-    </EditText>
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tvLabelEtTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:labelFor="@+id/etTo"
-        android:paddingBottom="8dp"
-        android:paddingTop="16dp"
-        android:text="@string/to"
-        android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimary"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="72dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp" >
 
-    <AutoCompleteTextView
-        android:id="@+id/to"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:completionThreshold="3"
-        android:fontFamily="sans-serif"
-        android:hint="Destination"
-        android:inputType="textNoSuggestions"
-        android:paddingBottom="16dp" />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Destination Description"
+                android:textCursorDrawable="@drawable/text_cursor_cyan"
+                android:textSize="34sp"
+                app:baseColor="@android:color/white"
+                app:floatingLabel="highlight"
+                app:maxCharacters="20"
+                app:primaryColor="?colorAccent"
+                app:singleLineEllipsis="true" />
+        </LinearLayout>
 
-    
-    <TextView
-        android:id="@+id/tvLabelEtFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:labelFor="@+id/etFrom"
-        android:paddingBottom="8dp"
-        android:paddingTop="16dp"
-        android:text="@string/from"
-        android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <Switch
-        android:id="@+id/swDynLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:fontFamily="sans-serif"
-        android:gravity="center_vertical|start"
-        android:paddingBottom="8dp"
-        android:text="@string/use_current_location"
-        android:textColor="@color/text_primary" 
-        android:onClick="onSwitchClicked"/>
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Destination"
+                android:textCursorDrawable="@drawable/text_cursor_cyan"
+                android:textSize="16sp"
+                app:floatingLabel="highlight"
+                app:baseColor="@color/text_primary"
+                app:primaryColor="@color/cyan_500" />
 
-    <AutoCompleteTextView
-        android:id="@+id/from"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:completionThreshold="3"
-        android:fontFamily="sans-serif"
-        android:hint="Origin"
-        android:inputType="textNoSuggestions"
-        android:paddingBottom="8dp"
-        android:textSize="16sp"
-        android:visibility="gone" >
+            <Switch
+                android:id="@+id/swDynLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical|start"
+                android:onClick="onSwitchClicked"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:text="@string/use_current_location"
+                android:textColor="@color/text_primary" />
 
-    </AutoCompleteTextView>
+            <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+                android:id="@+id/from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Origin"
+                android:textCursorDrawable="@drawable/text_cursor_cyan"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:primaryColor="?colorAccent" />
+        </LinearLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

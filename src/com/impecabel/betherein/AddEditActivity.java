@@ -3,11 +3,11 @@ package com.impecabel.betherein;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Switch;
@@ -30,7 +29,7 @@ import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.util.Key;
 import com.impecabel.betherein.FetchPlaceDetailsTask.OnFinish;
 
-public class AddEditActivity extends Activity implements OnItemClickListener {
+public class AddEditActivity extends ActionBarActivity implements OnItemClickListener {
 
 	private Place dest;
 //	private Place orig;
@@ -43,18 +42,16 @@ public class AddEditActivity extends Activity implements OnItemClickListener {
 	private AutoCompleteTextView atvFrom;
 	private AutoCompleteTextView atvTo;
 
-	EditText etDescription;
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		atvFrom = (AutoCompleteTextView) findViewById(R.id.from);
 		atvTo = (AutoCompleteTextView) findViewById(R.id.to);
-		etDescription = (EditText) findViewById(R.id.etDescription);
+		
 
 		atvFrom.setAdapter(new PlacesAutoCompleteAdapter(this,
 				android.R.layout.simple_dropdown_item_1line));
