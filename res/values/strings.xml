@@ -13,7 +13,8 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
     <string name="description">Description</string>
-    <string name="new_destination">Add/Edit Destination</string>
+    <string name="new_destination">Add Destination</string>
+    <string name="edit_destination">Add Destination</string>
     <string name="use_current_location">Use Current Location</string>
     
     

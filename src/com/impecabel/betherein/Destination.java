@@ -4,11 +4,16 @@ public class Destination {
 	private String description;
 	private Place destination;
 	private Place origin;
-	private DestinationDetails details;
-
-	public Destination(String description, DestinationDetails details) {
+	
+	public Destination(String description) {
 		this.description = description;
-		this.details = details;
+		
+	}
+	
+	public Destination(String description, Place destination, Place origin) {
+		this.description = description;	
+		this.destination = destination;
+		this.origin = origin;
 	}
 
 	/**
@@ -25,20 +30,6 @@ public class Destination {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	/**
-	 * @return the details
-	 */
-	public DestinationDetails getDetails() {
-		return details;
-	}
-
-	/**
-	 * @param details the details to set
-	 */
-	public void setDetails(DestinationDetails details) {
-		this.details = details;
-	}	
 
 	/**
 	 * @return the destination

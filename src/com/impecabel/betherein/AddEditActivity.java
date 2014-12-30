@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.api.client.http.GenericUrl;
@@ -29,18 +29,16 @@ import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.util.Key;
 import com.impecabel.betherein.FetchPlaceDetailsTask.OnFinish;
 
-public class AddEditActivity extends ActionBarActivity implements OnItemClickListener {
+public class AddEditActivity extends ActionBarActivity implements
+		OnItemClickListener {
 
-	private Place dest;
-//	private Place orig;
-
-	
-
-	
+	private Place destPlace;
 
 	protected static final int RESULT_CODE = 123;
-	private AutoCompleteTextView atvFrom;
+	private TextView etDescription;
 	private AutoCompleteTextView atvTo;
+	private View viewDescription;
+	private int destPosition;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -48,23 +46,24 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_edit);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		destPosition = getIntent().getIntExtra("position", -1);
 
-		atvFrom = (AutoCompleteTextView) findViewById(R.id.from);
-		atvTo = (AutoCompleteTextView) findViewById(R.id.to);
+		etDescription = (TextView) findViewById(R.id.etDescription);
+		atvTo = (AutoCompleteTextView) findViewById(R.id.to);	
 		
-
-		atvFrom.setAdapter(new PlacesAutoCompleteAdapter(this,
-				android.R.layout.simple_dropdown_item_1line));
 		atvTo.setAdapter(new PlacesAutoCompleteAdapter(this,
 				android.R.layout.simple_dropdown_item_1line));
 
 		atvTo.setOnItemClickListener(this);
-		atvFrom.setOnItemClickListener(this);
+		
+		viewDescription = findViewById(R.id.LayoutDescription);
 
-		//orig = new Place(true);
-		dest = new Place(false);
-
+		// orig = new Place(true);
+		destPlace = new Place(false);
+		int pos;
+		
 	}
+
 
 	private class PlacesAutoCompleteAdapter extends ArrayAdapter<Place>
 			implements Filterable {
@@ -106,7 +105,12 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 						FilterResults results) {
 					if (results != null && results.count > 0) {
 						notifyDataSetChanged();
+						getSupportActionBar().hide();
+						viewDescription.setVisibility(View.GONE);
 					} else {
+						getSupportActionBar().show();
+						viewDescription.setVisibility(View.VISIBLE);
+						
 						notifyDataSetInvalidated();
 					}
 				}
@@ -114,8 +118,6 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 			return filter;
 		}
 	}
-
-	
 
 	private ArrayList<Place> autocomplete(String input) {
 
@@ -127,7 +129,8 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 					.createRequestFactory(new HttpRequestInitializer() {
 						@Override
 						public void initialize(HttpRequest request) {
-							request.setParser(new JsonObjectParser(Utils.JSON_FACTORY));
+							request.setParser(new JsonObjectParser(
+									Utils.JSON_FACTORY));
 						}
 					});
 
@@ -143,8 +146,8 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 
 			List<Prediction> predictions = directionsResult.predictions;
 			for (Prediction prediction : predictions) {
-				resultList
-						.add(new Place(prediction.place_id, prediction.description));
+				resultList.add(new Place(prediction.place_id,
+						prediction.description));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -165,7 +168,7 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 
 		@Key("id")
 		public String id;
-		
+
 		@Key("place_id")
 		public String place_id;
 	}
@@ -185,66 +188,59 @@ public class AddEditActivity extends ActionBarActivity implements OnItemClickLis
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		case R.id.action_accept:
-			/*Destination new_dest = new Destination(etDescription.getText()
-					.toString(), new DestinationDetails("lalal",
-					dest.getDescription()));
-			new_dest.setDestination(dest);
-			new_dest.setOrigin(orig);
-			Globals.destinations.add(new_dest);
-			this.finish();
-			return true;*/
-			
+
 			final ProgressDialog dialog = new ProgressDialog(this);
-			
+
 			dialog.setMessage("Saving...");
 			dialog.show();
-			
-			FetchPlaceDetailsTask pd_fetcher = new FetchPlaceDetailsTask(dest.getPlace_id(), new OnFinish() {
 
-				@Override
-				public void finishOk(Place result) {
-					Toast.makeText(getApplicationContext(), "Download complete!",
-							Toast.LENGTH_LONG).show();
-					Toast.makeText(getApplicationContext(), result.getFormatted_address(),
-							Toast.LENGTH_LONG).show();
-					dialog.dismiss();
-				}
+			FetchPlaceDetailsTask pd_fetcher = new FetchPlaceDetailsTask(
+					destPlace.getPlace_id(), new OnFinish() {
 
-				@Override
-				public void finishError() {
-					Toast.makeText(getApplicationContext(), "ERROR",
-							Toast.LENGTH_LONG).show();
-					dialog.dismiss();
+						@Override
+						public void finishOk(Place result) {
+							Toast.makeText(getApplicationContext(),
+									"Download complete!", Toast.LENGTH_LONG)
+									.show();
+							Toast.makeText(getApplicationContext(),
+									result.getFormatted_address(),
+									Toast.LENGTH_LONG).show();
+							
+							destPlace.setFormatted_address(result.getFormatted_address());
+							destPlace.setLocation(result.getLocation());							
+						
+							dialog.dismiss();
+							saveDestination(destPosition);
+							finish();
+						}
 
-				}
-			});
+						@Override
+						public void finishError() {
+							Toast.makeText(getApplicationContext(), "ERROR",
+									Toast.LENGTH_LONG).show();
+							dialog.dismiss();
+
+						}
+					});
 			pd_fetcher.execute();
-			
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void onSwitchClicked(View view) {
-		// Is the toggle on?
-		boolean on = ((Switch) view).isChecked();
-		AutoCompleteTextView tvOrigin = (AutoCompleteTextView) findViewById(R.id.from);
-
-		if (on) {
-			tvOrigin.setVisibility(View.GONE);
-		} else {
-			tvOrigin.setVisibility(View.VISIBLE);
-		}
-	}
-
 	public void onItemClick(AdapterView<?> adapterView, View view,
 			int position, long id) {
-		Place selected_place = (Place) adapterView.getItemAtPosition(position);
-		Toast.makeText(this, selected_place.getPlace_id() + "", Toast.LENGTH_SHORT)
-				.show();
-
-		dest.setDescription(selected_place.getDescription());
-		dest.setPlace_id(selected_place.getPlace_id());
-		// adapterView.getItemAtPosition(position).
+		getSupportActionBar().show();
+		viewDescription.setVisibility(View.VISIBLE);
+		destPlace = (Place) adapterView.getItemAtPosition(position);
+		Toast.makeText(this, destPlace.getPlace_id() + "",
+				Toast.LENGTH_SHORT).show();
+	}
+	
+	private void saveDestination(int pos){
+		Destination newDestination = new Destination(etDescription.getText().toString(), destPlace, new Place(true));
+		Globals.destinations.add(newDestination);
+		
 	}
 
 }

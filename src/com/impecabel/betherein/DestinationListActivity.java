@@ -31,66 +31,26 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 	private TextView tvLocation;
 	private TextView tvAddress;
 
-	private GetAddressTask get_address;
-
-	private SensorManager mSensorManager;
-	private Sensor mAccelerometer;
-	private Sensor mMagnetometer;
-	private float[] accelVals = new float[3];
-	private float[] compassVals = new float[3];
-	private float[] mOrientation = new float[3];
-	private float mCurrentDegree = 0f;
-
-	private float heading = 0f;
-	private float destBearing = 0f;
-	private GeomagneticField geoField;
-
-	private static final float ALPHA = 0.15f;
-
-	//private Location portoLocation = new Location("FOR_TESTS");
+	// private Location portoLocation = new Location("FOR_TESTS");
 	private boolean hasDirections = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destination_list);
-		Globals.portoLocation = new Location("FOR_TESTS");
-		Globals.staticCurrentLocation = new Location("FOR_TESTS");
-		Globals.portoLocation.setLatitude(40.642989811262765);
-		Globals.portoLocation.setLongitude(-8.646524548530579);
-		Globals.staticCurrentLocation.setLatitude(40.64186191152463);
-		Globals.staticCurrentLocation.setLongitude(-8.643834292888641);
-		
-		Globals.destinations.add(new Destination("Coimbra",
-				new DestinationDetails("Aveiro", "Coimbra")));
-		Globals.destinations.add(new Destination("Porto",
-				new DestinationDetails("Aveiro", "Porto")));
-		Globals.destinations.add(new Destination("Lisboa",
-				new DestinationDetails("Aveiro", "Lisboa")));
+
+		add_dummy_data();
 		tvLocation = (TextView) findViewById(R.id.textView1);
 		tvAddress = (TextView) findViewById(R.id.textView2);
 
-		
-		
-		
-		
 		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		
+
 		destinatonAdapter = new DestinationListAdapter(this,
 				Globals.destinations);
 
 		recyclerView.setAdapter(destinatonAdapter);
 		recyclerView.setItemAnimator(new DefaultItemAnimator());
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
-		//recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.)));
-
-		
-
-		mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-		mAccelerometer = mSensorManager
-				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		mMagnetometer = mSensorManager
-				.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
 		mLocationHelper = new LocationHelper(this, new onLocationUpdate() {
 
@@ -98,28 +58,8 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 			public void locationUpdated(Location newLocation) {
 				if (newLocation != null) {
 
-					Globals.currentLocation = newLocation;
-					geoField = new GeomagneticField(
-							Double.valueOf(
-									Globals.currentLocation.getLatitude())
-									.floatValue(), Double.valueOf(
-									Globals.currentLocation.getLongitude())
-									.floatValue(), Double.valueOf(
-									Globals.currentLocation.getAltitude())
-									.floatValue(), System.currentTimeMillis());
-					destBearing = Globals.currentLocation
-							.bearingTo(Globals.portoLocation);
-
 					tvLocation
 							.setText(locationStringFromLocation(Globals.currentLocation));
-
-					// ivCompass =
-
-					// View tempView = exAdpt.getGroupView(2, false, null,
-					// exList);
-
-					// ivCompass = (ImageView)
-					// tempView.findViewById(R.id.ivCompass);
 
 					(new GetAddressTask(DestinationListActivity.this,
 							new onFinish() {
@@ -133,16 +73,6 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 										if (!hasDirections) {
 											tvAddress.setText(address);
 
-											/*
-											 * final ProgressDialog dialog = new
-											 * ProgressDialog(
-											 * getApplicationContext());
-											 * 
-											 * dialog.setMessage(
-											 * "Fetching directions...");
-											 * dialog.show();
-											 */
-
 											FetchDirectionsTask fd_task = new FetchDirectionsTask(
 													locationStringFromLocation(Globals.currentLocation),
 													locationStringFromLocation(Globals.portoLocation),
@@ -152,15 +82,7 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 														@Override
 														public void finishOk(
 																Directions result) {
-															/*
-															 * Toast.makeText(
-															 * getApplicationContext
-															 * (),
-															 * "Download complete!"
-															 * ,
-															 * Toast.LENGTH_LONG
-															 * ) .show();
-															 */
+
 															if (result.status
 																	.equals("OK")) {
 																tvAddress
@@ -172,7 +94,7 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 																tvAddress
 																		.setText(result.status);
 																hasDirections = true;
-															}// dialog.dismiss();
+															}
 
 														}
 
@@ -181,15 +103,6 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 																String status) {
 															tvAddress
 																	.setText(status);
-															/*
-															 * Toast.makeText(
-															 * getApplicationContext
-															 * (), "ERROR",
-															 * Toast
-															 * .LENGTH_LONG)
-															 * .show();
-															 */
-															// dialog.dismiss();
 
 														}
 
@@ -221,7 +134,6 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 		});
 
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -243,18 +155,6 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		// exList.setAdapter(exAdpt);
-		/*mSensorManager.registerListener(this, mAccelerometer,
-				SensorManager.SENSOR_DELAY_UI);
-		mSensorManager.registerListener(this, mMagnetometer,
-				SensorManager.SENSOR_DELAY_UI);*/
-
-		// TODO save and retrive location preferences
-	}
-
-	@Override
 	protected void onStart() {
 		super.onStart();
 		// Connect the client.
@@ -272,96 +172,14 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 		}
 		super.onStop();
 	}
-
+	
 	@Override
-	protected void onPause() {
-		super.onPause();
-		/*mSensorManager.unregisterListener(this, mAccelerometer);
-		mSensorManager.unregisterListener(this, mMagnetometer);*/
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		recyclerView.setAdapter(destinatonAdapter);
 
 	}
-
-/*	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		if (event.sensor == mAccelerometer) {
-
-			accelVals = lowPass(event.values.clone(), accelVals);
-		} else if (event.sensor == mMagnetometer) {
-			compassVals = lowPass(event.values.clone(), compassVals);
-		}
-		if (accelVals != null && compassVals != null) {
-			float R[] = new float[9];
-			float I[] = new float[9];
-			boolean success = SensorManager.getRotationMatrix(R, I, accelVals,
-					compassVals);
-			if (success) {
-				SensorManager.getOrientation(R, mOrientation);
-
-				float azimuthInRadians = mOrientation[0];
-
-				float azimuthInDegress = (float) Math.round((Math
-						.toDegrees(azimuthInRadians) + 360) % 360);
-
-				float azimuth = azimuthInDegress;
-				float baseAzimuth = azimuth;
-
-				// converts magnetic north into true north
-				if (geoField != null) {
-					azimuth -= geoField.getDeclination();
-				}
-
-				// If the bearTo is smaller than 0, add 360 to get the rotation
-				// clockwise.
-				destBearing = (destBearing + 360) % 360;
-
-				heading = (float) Math
-						.round((destBearing - azimuth + 360) % 360);
-
-				String bearingText = "N";
-
-				if ((360 >= baseAzimuth && baseAzimuth >= 337.5)
-						|| (0 <= baseAzimuth && baseAzimuth <= 22.5))
-					bearingText = "N";
-				else if (baseAzimuth > 22.5 && baseAzimuth < 67.5)
-					bearingText = "NE";
-				else if (baseAzimuth >= 67.5 && baseAzimuth <= 112.5)
-					bearingText = "E";
-				else if (baseAzimuth > 112.5 && baseAzimuth < 157.5)
-					bearingText = "SE";
-				else if (baseAzimuth >= 157.5 && baseAzimuth <= 202.5)
-					bearingText = "S";
-				else if (baseAzimuth > 202.5 && baseAzimuth < 247.5)
-					bearingText = "SW";
-				else if (baseAzimuth >= 247.5 && baseAzimuth <= 292.5)
-					bearingText = "W";
-				else if (baseAzimuth > 292.5 && baseAzimuth < 337.5)
-					bearingText = "NW";
-				else
-					bearingText = "?";
-
-				tvAddress.setText("destBearing: " + Float.toString(destBearing)
-						+ "azimuth: " + azimuth + " + Heading: "
-						+ Float.toString(heading));
-
-				// Globals.tvDesc.setText(bearingText);
-
-				RotateAnimation ra = new RotateAnimation(mCurrentDegree,
-						heading, Animation.RELATIVE_TO_SELF, 0.5f,
-						Animation.RELATIVE_TO_SELF, 0.5f);
-
-				ra.setDuration(250);
-
-				ra.setFillAfter(true);
-
-				Globals.ivCompass.startAnimation(ra);
-				mCurrentDegree = heading;
-			}
-		}
-	}*/
 
 	public static String locationStringFromLocation(final Location location) {
 		return Location
@@ -371,14 +189,14 @@ public class DestinationListActivity extends CompassSensorsActivity implements
 						Location.FORMAT_DEGREES);
 	}
 
-	protected float[] lowPass(float[] newVals, float[] oldVals) {
-		if (oldVals == null)
-			return newVals;
 
-		for (int i = 0; i < newVals.length; i++) {
-			oldVals[i] = oldVals[i] + ALPHA * (newVals[i] - oldVals[i]);
-		}
-		return oldVals;
+	private void add_dummy_data() {
+		Globals.portoLocation = new Location("FOR_TESTS");
+		Globals.staticCurrentLocation = new Location("FOR_TESTS");
+		Globals.portoLocation.setLatitude(40.642989811262765);
+		Globals.portoLocation.setLongitude(-8.646524548530579);
+		Globals.staticCurrentLocation.setLatitude(40.64186191152463);
+		Globals.staticCurrentLocation.setLongitude(-8.643834292888641);
 	}
 
 }
