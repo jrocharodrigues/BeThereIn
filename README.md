@@ -10,9 +10,13 @@ For GPS Location uses google play services fused location.
 Todo
 =========
 SQLITE support
+
 Get details for detail view (pic, map etc)
-Edit Support
+
 Location Optimization
+
 Widget
+
 Traffic...
+
 Colors
